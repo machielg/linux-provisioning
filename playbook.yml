@@ -1,0 +1,16 @@
+- hosts: localhost
+  vars:
+    pyenv_global: "system"
+  connection: local
+  become: false
+  roles:
+    - role: ansible-pyenv
+  tasks:
+    - name: download install poetry
+      get_url: 
+        url: "https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py"
+        dest: /tmp/get-poetry.py
+    - name: install poetry
+      command: python3 /tmp/get-poetry.py
+      args:
+        creates: ~/.poetry/bin/poetry

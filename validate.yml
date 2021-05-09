@@ -1,0 +1,11 @@
+- hosts: localhost
+  gather_facts: no
+  connection: local
+  become: false
+  tasks:
+    - shell: poetry --version
+      register: cmd_result
+
+    - assert:
+        that:
+          - "'Poetry version' in cmd_result.stdout"
